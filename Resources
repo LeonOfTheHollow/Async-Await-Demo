@@ -1,0 +1,8 @@
+https://javascript.info/async-await
+A very practical and in-depth tutorial on using and understanding async/await, and how it compares to othetr asynchronous handling methods. This is the first A/A resource I found and learned a lot from.
+
+https://gist.github.com/wesbos/1866f918824936ffb73d8fd0b02879b4
+Gist from Wes Bos, thought leader in the field, providing simple examples of async/await functionality. Primary source for my talk's material.
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
+As usual, the official MDN documentation is sparse, but every word there is gospel. Read after reading the other two for best comprehension.
