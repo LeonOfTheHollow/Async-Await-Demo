@@ -1,19 +1,19 @@
 function brewTea() {
   return new Promise((resolve, reject) => {
-    teaIsReady = true;
+    haveTea = true;
     setTimeout(() => {
-      if (teaIsReady) resolve('☕');
-      else reject('Something went wrong with the tea. . .');
+      if (haveTea) resolve('☕');
+      else reject("We don't have any tea!");
     }, 3000)
   });
 }
 
 function bakeCake() {
   return new Promise((resolve, reject) => {
-    cakeIsReady = true;
+    droppedCake = false;
     setTimeout(() => {
-      if (cakeIsReady) resolve('🍰');
-      else reject('Something went wrong with the cake. . .');
+      if (droppedCake) reject("I dropped the cake :(");
+      else resolve('🍰');
     }, 3000)
   });
 }
@@ -40,13 +40,16 @@ function thenGo() {
     .catch(err => console.log(err));
 }
 
+//thenGo();
+
 async function awaitGo() {
   try {
-    console.log(await brewTea());
+    const resolutionOfTeaPromise = await brewTea();
+    console.log(resolutionOfTeaPromise);
     console.log(await bakeCake());
-  } catch(err) {
-    console.log(err);
+  } catch(e) {
+    console.log(e);
   }
 }
 
-thenGo();
+awaitGo();

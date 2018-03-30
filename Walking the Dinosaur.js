@@ -1,33 +1,34 @@
+//These promises are very simple - they wait two seonds, then resolve or reject based on their internal logic. But you can think of them as a stand-in for any asynchronous action that
+//returns a promise: 'axios' is the example you are most likely familiar with, but there are all kinds of ways to get promises as the results of API calls, hardware polling, and more.
+
 function openTheDoor() {
   return new Promise((resolve, reject) => {
-    doorIsOpen = true;
+    foundDoor = true;
     setTimeout(() => {
-      if (doorIsOpen) resolve("Opened the door!");
-      else reject('Couldn\'t open the door. . .');
+      if (foundDoor) resolve("Opened the door!");
+      else reject("Couldn't find the door...");
     }, 2000)
   });
 }
 
 function getOnTheFloor() {
   return new Promise((resolve, reject) => {
-    onTheFloor = false;
+    shoelacesTied = false;
     setTimeout(() => {
-      if (onTheFloor) resolve("Got on the floor!");
-      else reject('Couldn\'t get on the floor. . .');
+      if (shoelacesTied) resolve("Got on the floor!");
+      else reject("Tripped on your shoelaces...");
     }, 2000)
   });
 }
 
 function walkTheDinosaur() {
-  return new Promise((resolve, reject) => {
-    walking = true;
+  return new Promise((resolve) => {
     setTimeout(() => {
-      if (walking) resolve("Now we're walking the dinosaur!");
-      else reject('Didn\'t walk the dinosaur. . .');
+      resolve("Now we're walking the dinosaur!");
     }, 2000)
   });
 }
-
+/* * * * * * * * * * * * * * * * * * * */
 function BAD_walkingTheDinosaur() {
   let openingTheDoorWorked;
   let gettingOnTheFloorWorked;
@@ -52,6 +53,12 @@ function BAD_walkingTheDinosaur() {
 
 //BAD_walkingTheDinosaur();
 
+/*BAD_walkingTheDinosaur is aptly named. It's a naive approach, and worse, it won't work right: The if statement on line 46 will check the two flag values before the promise has resolved, and they will both still be undefined. 
+Even if you can find the door and tie your shoes, you will be unable to Walk the Dinosaur.*/
+
+/* * * * * * * * * * * * * * * * * * * */
+
+
 function THEN_walkingTheDinosaur() {
   openTheDoor()
     .then(door => console.log(door))
@@ -70,6 +77,11 @@ function THEN_walkingTheDinosaur() {
 
 //THEN_walkingTheDinosaur();
 
+/* Now we're getting somewhere. This is the proper way to get the functionality we need with .then, and we can walk the dinosaur. It's sort of a clunky dino, though.
+Notice that as we have more asynchronous actions that depend on other asynchronous actions, our code acquires additional scopes and requires additional error handling.*/
+
+/* * * * * * * * * * * * * * * * * * * */
+
 async function AWAIT_walkingTheDinosaur() {
   try {
     const door = await openTheDoor();
@@ -84,3 +96,39 @@ async function AWAIT_walkingTheDinosaur() {
 }
 
 //AWAIT_walkingTheDinosaur()
+
+/*And finally, we have our awesome awaiting dinosaur. Look how much simpler the code is! Finally, a couple twists on the theme:*/
+
+async function SHORT_walkingTheDinosaur() {
+  try {
+    console.log(await openTheDoor());
+    console.log(await getOnTheFloor());
+    console.log(await walkTheDinosaur());
+  } catch(err) {
+    console.log(err);
+  }
+}
+
+//The first solution can be further simplified by omitting the variable assignments.
+//You can use the await statement immediately as a resolved promise, or even simply invoke await on a function who's return doesn't matter to pause execution until it concludes.
+
+async function ALL_walkingTheDinosaur() {
+  try {
+    const doorPromise = openTheDoor();
+    const floorPromise = getOnTheFloor();
+    const dinosaurPromise = walkTheDinosaur();
+
+    const results = await Promise.all([doorPromise, floorPromise, dinosaurPromise]);
+    console.log(results);
+  } catch(err) {
+    console.log(err);
+  }
+}
+
+//This is a slick one: because await works with any promise, you can declare all of your promises synchronously, then send them all off at once with await Promise.all().
+//Remember, you are still inside your try...catch block, so if any of the promises fail, they will throw an error and all of the promises will fail.
+//That means this function's behavior is actually slightly different. Try setting shoelacesTied to false: not only will you trip on your shoelaces,
+//you won't even successfully open the door, because the entire 'await' statement will fail together.
+
+//This isn't always the behavior you want, but it can be a powerful way to structure your code, especially when you need to operate on the results of many promises together.
+//ALL_walkingTheDinosaur();
