@@ -54,7 +54,7 @@ function BAD_walkingTheDinosaur() {
 //BAD_walkingTheDinosaur();
 
 /*BAD_walkingTheDinosaur is aptly named. It's a naive approach, and worse, it won't work right: The if statement on line 46 will check the two flag values before the promise has resolved, and they will both still be undefined. 
-Even if you can find the door and tie your shoes, you will be unable to Walk the Dinosaur.*/
+Even if you can find the door and tie your shoes eventually, you won't do so in time to Walk the Dinosaur.*/
 
 /* * * * * * * * * * * * * * * * * * * */
 
@@ -77,7 +77,7 @@ function THEN_walkingTheDinosaur() {
 
 //THEN_walkingTheDinosaur();
 
-/* Now we're getting somewhere. This is the proper way to get the functionality we need with .then, and we can walk the dinosaur. It's sort of a clunky dino, though.
+/* Now we're getting somewhere. This is the proper way to get the functionality we need with .then, and we can start walking the dinosaur. It's sort of a clunky dino, though.
 Notice that as we have more asynchronous actions that depend on other asynchronous actions, our code acquires additional scopes and requires additional error handling.*/
 
 /* * * * * * * * * * * * * * * * * * * */
@@ -97,7 +97,10 @@ async function AWAIT_walkingTheDinosaur() {
 
 //AWAIT_walkingTheDinosaur()
 
-/*And finally, we have our awesome awaiting dinosaur. Look how much simpler the code is! Finally, a couple twists on the theme:*/
+/*And finally, we have our awesome awaiting dinosaur. Look how much simpler the code is! The script actually pauses execution at each await, and doesn't continue
+to the next line until the awaited promise is resolved. If any prpblem rejects, await will recognize the rejection as an error, and control - and the error message - will
+fall through to the catch block.
+Finally, a couple twists on the theme:*/
 
 async function SHORT_walkingTheDinosaur() {
   try {
@@ -110,7 +113,7 @@ async function SHORT_walkingTheDinosaur() {
 }
 
 //The first solution can be further simplified by omitting the variable assignments.
-//You can use the await statement immediately as a resolved promise, or even simply invoke await on a function who's return doesn't matter to pause execution until it concludes.
+//You can use the results of an await statement immediately as a resolved promise, or even simply invoke await on a function whose return doesn't matter to pause execution until it concludes.
 
 async function ALL_walkingTheDinosaur() {
   try {
