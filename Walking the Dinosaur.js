@@ -1,5 +1,5 @@
 //These promises are very simple - they wait two seonds, then resolve or reject based on their internal logic. But you can think of them as a stand-in for any asynchronous action that
-//returns a promise: 'axios' is the example you are most likely familiar with, but there are all kinds of ways to get promises as the results of API calls, hardware polling, and more.
+//returns a promise: 'axios' and 'bcrypt' are the examples you are most likely familiar with, but there are all kinds of ways to get promises as the results of API calls, hardware polling, and more.
 
 function openTheDoor() {
   return new Promise((resolve, reject) => {
