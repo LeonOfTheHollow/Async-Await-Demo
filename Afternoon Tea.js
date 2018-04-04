@@ -8,6 +8,24 @@ function brewTea() {
   });
 }
 
+function thenGoGetTea() {
+  brewTea()
+    .then(tea => console.log(`Here's your ${tea}!`))
+    .catch(err => console.log(err));
+}
+
+//thenGoGetTea();
+
+const goGetTea = async () => {
+  try {
+    const tea = await brewTea();
+    console.log(`Here's your ${tea}!`)
+  } catch(err) {
+    console.log(err);
+  }
+}
+
+
 function bakeCake() {
   return new Promise((resolve, reject) => {
     droppedCake = false;

@@ -1,4 +1,4 @@
-//These promises are very simple - they wait two seonds, then resolve or reject based on their internal logic. But you can think of them as a stand-in for any asynchronous action that
+//These promises are very simple - they wait two seconds, then resolve or reject based on their internal logic. But you can think of them as a stand-in for any asynchronous action that
 //returns a promise: 'axios' is the example you are most likely familiar with, but there are all kinds of ways to get promises as the results of API calls, hardware polling, and more.
 
 function openTheDoor() {
@@ -24,7 +24,7 @@ function getOnTheFloor() {
 function walkTheDinosaur() {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve("Now we're walking the dinosaur!");
+      resolve("Now you're walking the dinosaur!");
     }, 2000)
   });
 }
@@ -53,7 +53,8 @@ function BAD_walkingTheDinosaur() {
 
 //BAD_walkingTheDinosaur();
 
-/*BAD_walkingTheDinosaur is aptly named. It's a naive approach, and worse, it won't work right: The if statement on line 46 will check the two flag values before the promise has resolved, and they will both still be undefined. 
+/*BAD_walkingTheDinosaur is aptly named. It's a naive approach, and worse, it won't work right:
+The if statement on line 46 will check the two flag values before the promise has resolved, and they will both still be undefined. 
 Even if you can find the door and tie your shoes, you will be unable to Walk the Dinosaur.*/
 
 /* * * * * * * * * * * * * * * * * * * */
@@ -84,7 +85,7 @@ Notice that as we have more asynchronous actions that depend on other asynchrono
 
 async function AWAIT_walkingTheDinosaur() {
   try {
-    const door = await openTheDoor();
+    const password = await getAPassword();
     console.log(door);
     const floor = await getOnTheFloor();
     console.log(floor);
@@ -95,19 +96,21 @@ async function AWAIT_walkingTheDinosaur() {
   }
 }
 
-//AWAIT_walkingTheDinosaur()
+//AWAIT_walkingTheDinosaur();
 
 /*And finally, we have our awesome awaiting dinosaur. Look how much simpler the code is! Finally, a couple twists on the theme:*/
 
 async function SHORT_walkingTheDinosaur() {
   try {
-    console.log(await openTheDoor());
-    console.log(await getOnTheFloor());
+    await openTheDoor();
+    await getOnTheFloor();
     console.log(await walkTheDinosaur());
   } catch(err) {
     console.log(err);
   }
 }
+
+SHORT_walkingTheDinosaur();
 
 //The first solution can be further simplified by omitting the variable assignments.
 //You can use the await statement immediately as a resolved promise, or even simply invoke await on a function who's return doesn't matter to pause execution until it concludes.
@@ -131,4 +134,4 @@ async function ALL_walkingTheDinosaur() {
 //you won't even successfully open the door, because the entire 'await' statement will fail together.
 
 //This isn't always the behavior you want, but it can be a powerful way to structure your code, especially when you need to operate on the results of many promises together.
-//ALL_walkingTheDinosaur();
+ALL_walkingTheDinosaur();

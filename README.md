@@ -1,5 +1,5 @@
 ASYNCHRONOUS IN GENERAL
-> Asynchronous functions are functions that need to reach outside of your script to execute, or otherwise require the script to wait for a result before doing something with it.
+> Asynchronous functions are functions that need to reach outside of your script to execute, or otherwise require the script to wait for a result before doing something with it. Two familiar examples are axios and bcrypt.
 
 > Promises and callbacks are two different ways of handling asynchronous code. Nowadays, promises are *generally* preferred.
 
