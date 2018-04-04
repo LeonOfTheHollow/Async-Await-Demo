@@ -1,3 +1,14 @@
+RESOURCES
+https://javascript.info/async-await 
+*Toe-to-tip tutorial on getting started with A/A. This is the first really good resource I found.
+
+https://gist.github.com/wesbos/1866f918824936ffb73d8fd0b02879b4
+*Async/Await examples gist from Wes Bos, thought leader in the field. Primary source for my talk.
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
+*Official MDN docs on A/A: sparse as usual, but every word there is gospel. Read after the other two for best comprehension.
+
+
 ASYNCHRONOUS IN GENERAL
 > Asynchronous functions are functions that need to reach outside of your script to execute, or otherwise require the script to wait for a result before doing something with it. Two familiar examples are axios and bcrypt.
 

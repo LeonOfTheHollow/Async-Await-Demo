@@ -13,7 +13,7 @@ function openTheDoor() {
 
 function getOnTheFloor() {
   return new Promise((resolve, reject) => {
-    shoelacesTied = false;
+    shoelacesTied = true;
     setTimeout(() => {
       if (shoelacesTied) resolve("Got on the floor!");
       else reject("Tripped on your shoelaces...");
@@ -85,7 +85,7 @@ Notice that as we have more asynchronous actions that depend on other asynchrono
 
 async function AWAIT_walkingTheDinosaur() {
   try {
-    const password = await getAPassword();
+    const door = await openTheDoor();
     console.log(door);
     const floor = await getOnTheFloor();
     console.log(floor);
